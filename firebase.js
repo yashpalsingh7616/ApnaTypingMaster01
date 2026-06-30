@@ -10,15 +10,15 @@ import { getAuth, signInWithEmailAndPassword, signOut }
                                     from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey:            "AIzaSyAnW7etN6Z3VTjot5KjpmG6JeDlkOBJbE4",
-  authDomain:        "apna-typing-master-pro.firebaseapp.com",
-  databaseURL:       "https://apna-typing-master-pro-default-rtdb.firebaseio.com",
-  projectId:         "apna-typing-master-pro",
-  storageBucket:     "apna-typing-master-pro.firebasestorage.app",
-  messagingSenderId: "256116678227",
-  appId:             "1:256116678227:web:544898c8211226c69370a6",
-  measurementId:     "G-DR7LY8Z642"
-};
+    apiKey: "AIzaSyAJcKdAYz2SRA75XtDB_VQZEzvoCK8WdUQ",
+    authDomain: "apna-typing-master-pro-af16d.firebaseapp.com",
+    databaseURL: "https://apna-typing-master-pro-af16d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "apna-typing-master-pro-af16d",
+    storageBucket: "apna-typing-master-pro-af16d.firebasestorage.app",
+    messagingSenderId: "727800871355",
+    appId: "1:727800871355:web:97bc57c93e6514372fac9e",
+    measurementId: "G-6CNL0V0BPS"
+  };
 
 let fbApp, db, auth, fbOk = false;
 try {
