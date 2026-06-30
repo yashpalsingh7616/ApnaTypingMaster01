@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<title>Apna Typing Master Pro — India's #1 Typing Practice</title>
+</head>
+<body>
+
+<div id="landingPage">
+  <header class="lp-header">
+    <div class="logo" onclick="window.scrollTo(0,0)">
+      <div class="logo-icon">⌨</div>
+      Apna Typing <span>Master</span> Pro
+    </div>
+    <nav class="lp-nav">
+      <a href="#">Home</a>
+      <a href="#">Pricing</a>
+      <a href="#">Features</a>
+      <div class="user-badge" id="userBadge">
+        <span class="user-dot"></span>
+        <span id="userNameDisplay">User</span>
+        <button class="btn-logout-lp" onclick="doLogout()">Logout</button>
+      </div>
+      <!-- ★ ADMIN BUTTON — always visible top-right ★ -->
+      <button class="admin-icon-btn" id="adminNavBtn" onclick="openAdminPage()" title="Admin Panel">
+        ⚙️ Admin
+        <span class="adm-tooltip">Admin Panel — Add/Edit Passages</span>
+      </button>
+      <button class="lp-btn lp-btn-login" id="headerLoginBtn" onclick="openAuthModal('login')">Log In</button>
+      <button class="lp-btn lp-btn-start" id="headerStartBtn" onclick="openAuthModal('signup')">Get Started →</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="badge">🏆 INDIA'S #1 TYPING PRACTICE PLATFORM</div>
+    <h1>Master Typing.<br>Pass Every <span class="highlight">Government Exam.</span></h1>
+    <p>Practice English & Hindi typing for SSC, RRB, High Court, UPSC and more. Real exam patterns, live timers, detailed reports.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary-lp" onclick="openAuthModal('signup')">Start Free Practice →</button>
+      <button class="btn-secondary-lp" onclick="openAuthModal('login')">Log In</button>
+    </div>
+  </section>
+
+  <div class="lp-stats">
+    <div><div class="stat-num">2.4L+</div><div class="stat-label">Registered Users</div></div>
+    <div><div class="stat-num">500+</div><div class="stat-label">Practice Passages</div></div>
+    <div><div class="stat-num">18+</div><div class="stat-label">Exam Patterns</div></div>
+    <div><div class="stat-num">98%</div><div class="stat-label">Success Rate</div></div>
+  </div>
+
+  <section class="features">
+    <div class="features-title">Everything You Need to Qualify</div>
+    <div class="features-sub">Built specifically for Indian government exam aspirants</div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-card-icon">📝</div><h3>Real Exam Passages</h3><p>Practice with passages from actual SSC CGL, RRB NTPC, High Court, and UPSC exams. 500+ exercises available.</p></div>
+      <div class="feat-card"><div class="feat-card-icon">🌐</div><h3>English & Hindi</h3><p>Full support for English typing and Hindi typing in KrutiDev, DevLys, and Mangal Unicode fonts.</p></div>
+      <div class="feat-card"><div class="feat-card-icon">📊</div><h3>Detailed Analysis</h3><p>Get WPM, accuracy, backspace count, net/gross speed — exactly the way your exam will calculate it.</p></div>
+      <div class="feat-card"><div class="feat-card-icon">🏆</div><h3>Exam Mode</h3><p>Simulate real exam conditions with strict timer, no corrections, and official evaluation criteria.</p></div>
+      <div class="feat-card"><div class="feat-card-icon">🔴</div><h3>Live Tests — Free!</h3><p>Participate in scheduled live typing tests with results & rankings. Free for all registered users.</p></div>
+      <div class="feat-card"><div class="feat-card-icon">📱</div><h3>Mobile Friendly</h3><p>Practice on any device. Sync progress seamlessly across all your devices.</p></div>
+    </div>
+  </section>
+
+  <footer class="lp-footer">
+    <div>© 2026 Apna Typing Master Pro · Made with ❤️ for India's exam aspirants</div>
+    <div>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </footer>
+</div>
+
+<!-- =====================================================
+     AUTH MODAL
+     ===================================================== -->
+<div class="modal-overlay" id="authModal" onclick="handleAuthOverlay(event)">
+  <div class="modal-box-auth">
+    <button class="modal-close-btn" onclick="closeAuthModal()">✕</button>
+    <div class="modal-title" id="authTitle">Welcome Back 👋</div>
+    <div class="modal-sub" id="authSub">Apna account access karein</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Log In</button>
+      <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+    <div id="authLoginForm">
+      <div class="field"><label>Email ya Mobile Number</label><input type="text" id="authLoginEmail" placeholder="example@email.com"/></div>
+      <div class="field"><label>Password</label><input type="password" id="authLoginPass" placeholder="••••••••"/></div>
+      <div class="error-msg" id="authLoginErr">❌ Email aur password dono likhein.</div>
+      <button class="btn-submit-auth" onclick="doAuthLogin()">Log In →</button>
+    </div>
+    <div id="authSignupForm" style="display:none;">
+      <div class="field"><label>Pura Naam</label><input type="text" id="authSignupName" placeholder="Aapka naam"/></div>
+      <div class="field"><label>Email Address</label><input type="email" id="authSignupEmail" placeholder="example@email.com"/></div>
+      <div class="field"><label>Password banayein</label><input type="password" id="authSignupPass" placeholder="Min. 6 characters"/></div>
+      <div class="field"><label>Preparing For</label>
+        <select id="authSignupExam">
+          <option>SSC CGL</option><option>SSC CHSL</option><option>RRB NTPC</option>
+          <option>High Court</option><option>UPSC</option><option>UPSSSC</option>
+          <option>Allahabad HC</option><option>KVS</option><option>State Exam</option>
+        </select>
+      </div>
+      <div class="error-msg" id="authSignupErr">❌ Sabhi fields bharna zaroori hai.</div>
+      <button class="btn-submit-auth" onclick="doAuthSignup()">Account Banayein →</button>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script src="app.js"></script>
+<script type="module" src="firebase.js"></script>
+<script>
+loadSession();
+
+function updateLPHeader(){
+  const badge=document.getElementById('userBadge');
+  const loginBtn=document.getElementById('headerLoginBtn');
+  const startBtn=document.getElementById('headerStartBtn');
+  if(APP.loggedIn){
+    if(badge)badge.classList.add('visible');
+    const nd=document.getElementById('userNameDisplay');if(nd)nd.textContent=APP.name;
+    if(loginBtn)loginBtn.style.display='none';
+    if(startBtn){startBtn.textContent='Dashboard →';startBtn.onclick=()=>window.location.href='candidate.html';}
+  }else{
+    if(badge)badge.classList.remove('visible');
+    if(loginBtn)loginBtn.style.display='';
+    if(startBtn){startBtn.textContent='Get Started →';startBtn.onclick=()=>openAuthModal('signup');}
+  }
+}
+updateLPHeader();
+
+function loginSuccess(name,email){
+  APP.loggedIn=true;APP.name=name;APP.email=email;
+  saveSession();closeAuthModal();
+  // Track in Firebase: new signup vs returning login
+  const isNewSignup = document.getElementById('authSignupForm') && document.getElementById('authSignupForm').style.display!=='none';
+  if(isNewSignup && typeof window.fbTrackSignup==='function'){
+    window.fbTrackSignup(name, email, '');
+  } else if(typeof window.fbTrackLogin==='function'){
+    window.fbTrackLogin(email);
+  }
+  window.location.href='candidate.html';
+}
+function doLogout(){
+  APP.loggedIn=false;APP.isPro=false;APP.name='';APP.email='';
+  saveSession();updateLPHeader();
+}
+function openAdminPage(){ window.location.href='admin.html'; }
+</script>
+</body>
+</html>

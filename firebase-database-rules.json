@@ -1,0 +1,24 @@
+{
+  "rules": {
+    "passages": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "users": {
+      ".read": "auth != null",
+      ".write": true
+    },
+    "payments": {
+      ".read": "auth != null",
+      ".write": true
+    },
+    "activeSessions": {
+      ".read": "auth != null",
+      ".write": true
+    },
+    "dailyStats": {
+      ".read": "auth != null",
+      ".write": true
+    }
+  }
+}

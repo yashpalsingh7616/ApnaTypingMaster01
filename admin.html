@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<title>Admin Panel — Apna Typing Master Pro</title>
+</head>
+<body>
+<style>body{margin:0;}#adminPage{display:block!important;min-height:100vh;}</style>
+
+<div id="adminPage">
+  <div class="adm-topbar">
+    <div class="adm-logo">⚙️ Admin Panel — Apna Typing Master Pro</div>
+    <div class="adm-topbar-right">
+      <span class="adm-topbar-info" id="admLoggedInInfo"></span>
+      <button class="adm-back-btn" onclick="closeAdminPage()">← Back to Site</button>
+      <button class="adm-save-btn" onclick="admSaveAll()">💾 Save All</button>
+    </div>
+  </div>
+  <div id="admGate">
+    <!-- Login box -->
+    <div class="adm-login-gate" id="admLoginGate">
+      <div class="adm-login-box">
+        <div class="adm-login-icon">🔐</div>
+        <div class="adm-login-title">Admin Login</div>
+        <div class="adm-login-sub">Apne admin credentials se login karein</div>
+        <div class="adm-field"><label>Admin Email</label><input type="email" id="admEmail" value="admin@apnatyping.com"></div>
+        <div class="adm-field"><label>Password</label><input type="password" id="admPass" value="admin@123"></div>
+        <div class="adm-login-err" id="admLoginErr">❌ Galat credentials. Default: admin@apnatyping.com / admin@123</div>
+        <button class="adm-login-btn" onclick="doAdminLogin()" style="margin-top:10px;">Login as Admin →</button>
+        <div style="margin-top:12px;font-size:11px;color:#6b6b8a;">Email: admin@apnatyping.com &nbsp;|&nbsp; Pass: admin@123</div>
+      </div>
+    </div>
+    <!-- Main UI -->
+    <div id="admMain" style="display:none;">
+      <div class="adm-main-nav">
+        <button class="adm-main-nav-btn active" id="admNavAnalytics" onclick="showAdminAnalytics()">📊 Website Analytics</button>
+        <button class="adm-main-nav-btn" id="admNavPassages" onclick="showAdminPassages()">📝 Manage Passages</button>
+      </div>
+
+      <!-- ANALYTICS VIEW (default, shown first after login) -->
+      <div id="admAnalyticsView"></div>
+
+      <!-- PASSAGES VIEW (hidden by default, opens via button) -->
+      <div id="admPassagesView" style="display:none;">
+        <div class="adm-tabs">
+          <button class="adm-tab active" onclick="switchAdmTab(0)">📝 English Normal <span class="tab-count" id="tcount0">0</span></button>
+          <button class="adm-tab" onclick="switchAdmTab(1)">📝 Hindi Normal <span class="tab-count" id="tcount1">0</span></button>
+          <button class="adm-tab" onclick="switchAdmTab(2)">🔴 English Live <span class="tab-count live" id="tcount2">0</span></button>
+          <button class="adm-tab" onclick="switchAdmTab(3)">🔴 Hindi Live <span class="tab-count live" id="tcount3">0</span></button>
+          <button class="adm-tab" onclick="switchAdmTab(4)">🔢 Numbers <span class="tab-count" id="tcount4">0</span></button>
+        </div>
+        <div class="adm-content" id="admContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="adm-toast" id="admToast"></div>
+
+<script src="shared.js"></script>
+<script src="app.js"></script>
+<script type="module" src="firebase.js"></script>
+<script>
+loadSession();
+function closeAdminPage(){
+  if(typeof window.fbAdminSignOut==='function') window.fbAdminSignOut();
+  window.setAdmLoggedIn(false);
+  window.location.href='candidate.html';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const adm=document.getElementById('adminPage');
+  if(adm) adm.style.display='block';
+  if(window.getAdmLoggedIn()){
+    const gate=document.getElementById('admLoginGate');
+    const main=document.getElementById('admMain');
+    if(gate) gate.style.display='none';
+    if(main) main.style.display='block';
+    if(typeof window.showAdminAnalytics==='function') window.showAdminAnalytics();
+  }
+});
+</script>
+</body>
+</html>
